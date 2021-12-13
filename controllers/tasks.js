@@ -26,7 +26,7 @@ const updateTask = async (req, res) => {
         }
     }
     try {
-        const task = await Task.updateOne({id: req.params}, {completed: bool, name: name()});
+        const task = await Task.findByIdAndUpdate(req.params.id, {completed: bool, name: name()});
         res.status(200).json({task});
     } catch (error) {
         res.status(500).json({msg:error});
@@ -34,7 +34,7 @@ const updateTask = async (req, res) => {
 }
 const deleteTask = async (req, res) => {
     try {
-        const task = await Task.deleteOne({id:req.params});
+        const task = await Task.findByIdAndDelete(req.params.id);
         res.status(200).json({task});
     } catch (error) {
         res.status(500).json({msg:error});
